@@ -1,0 +1,20 @@
+{
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/.git/**": true,
+    "**/uploads/**": true,
+    "**/.agents/**": true,
+    "**/.claude/**": true,
+    "**/.windsurf/**": true
+  },
+  "search.exclude": {
+    "**/node_modules/**": true,
+    "**/.next/**": true,
+    "**/.git/**": true,
+    "**/uploads/**": true,
+    "**/.agents/**": true,
+    "**/.claude/**": true,
+    "**/.windsurf/**": true
+  }
+}
