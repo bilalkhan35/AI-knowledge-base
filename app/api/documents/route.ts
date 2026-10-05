@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
+type DocumentRow = {
+  document_id: string;
+  file_name: string;
+};
+
+type ConversationSummary = {
+  id: string;
+};
+
 export async function GET() {
   try {
     const { data, error } = await supabase
@@ -16,13 +25,13 @@ export async function GET() {
 
     const documents = Array.from(
       new Map(
-        data.map((row) => [
+        (data as DocumentRow[] | null | undefined)?.map((row: DocumentRow) => [
           row.document_id,
           {
             documentId: row.document_id,
             fileName: row.file_name,
           },
-        ]),
+        ]) ?? [],
       ).values(),
     );
 
@@ -64,7 +73,9 @@ export async function DELETE(request: Request) {
     }
 
     const conversationIds =
-      conversations?.map((conversation) => conversation.id) ?? [];
+      (conversations as ConversationSummary[] | null | undefined)?.map(
+        (conversation: ConversationSummary) => conversation.id,
+      ) ?? [];
 
     // 2. Delete messages first
     // messages reference conversations
